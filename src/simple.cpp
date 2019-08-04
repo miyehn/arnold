@@ -1,5 +1,5 @@
 #include <ai.h>
-#include <cstring>
+#include "diffuse_bsdf.h"
  
 AI_SHADER_NODE_EXPORT_METHODS(simpleMethods);
  
@@ -24,7 +24,12 @@ node_finish
  
 shader_evaluate
 {
-   sg->out.RGB() = AiShaderEvalParamRGB(p_color);
+  if (sg->Rt & AI_RAY_SHADOW) return;
+
+  AtRGB color = AiShaderEvalParamRGB(p_color);
+  if (AiColorIsSmall(color)) return;
+
+  sg->out.CLOSURE() = DiffuseBSDFCreate(sg, color, sg->Nf);
 }
  
 node_loader
@@ -32,7 +37,7 @@ node_loader
    if (i > 0)
       return false;
    node->methods     = simpleMethods;
-   node->output_type = AI_TYPE_RGB;
+   node->output_type = AI_TYPE_CLOSURE;
    node->name        = "simple";
    node->node_type   = AI_NODE_SHADER;
    strcpy(node->version, AI_VERSION);
