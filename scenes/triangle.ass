@@ -1,0 +1,107 @@
+
+options
+{
+ AA_samples 3
+ outputs "RGBA rgba filter render"
+ xres 640
+ yres 480
+ GI_diffuse_depth 1
+ GI_specular_depth 1
+}
+
+gaussian_filter
+{
+ name filter
+ width 2
+}
+
+driver_jpeg
+{
+ name render
+ filename "triangle.jpg"
+}
+
+persp_camera
+{
+ name Camera
+ matrix 1 2 MATRIX
+
+ 0.344642907 -1.3079644e-09 -0.938733876 0
+ -0.186681271 0.980026901 -0.0685374066 0
+ 0.91998446 0.198864967 0.337759316 0
+ 18.4735165 4.06332207 5.04470825 1
+  
+ 0.344642907 -1.3079644e-09 -0.938733876 0
+ -0.186681271 0.980026901 -0.0685374066 0
+ 0.91998446 0.198864967 0.337759316 0
+ 18.4735165 4.06332207 5.04470825 1
+ near_clip 0.100000001
+ far_clip 32768
+ screen_window_min -1 -1
+ screen_window_max 1 1
+ shutter_start 0.25
+ shutter_end 0.75
+ shutter_type "box"
+ fov 1 2 FLOAT
+53.6380005 53.6380005
+ plane_distance on
+ focus_distance 1 2 FLOAT
+17.0716553 17.0716553
+ aperture_size 0
+}
+
+distant_light
+{
+ name light
+ matrix
+ 0.788675129 -0.211324871 -0.577350259 0
+ -0.211324871 0.788675129 -0.577350259 0
+ 0.577350259 0.577350259 0.577350259 0
+ 1 1 1 1
+ color 1 1 1
+ intensity 1
+ exposure 1
+ cast_shadows on
+ shadow_density 1
+ shadow_color 0 0 0
+ samples 2
+ normalize on
+ indirect 1
+ max_bounces 999
+ angle 0
+}
+
+polymesh
+{
+ name sphere
+ visibility 255
+ sidedness 255
+ matrix 1 2 MATRIX
+
+ 0.996061206 0.088396661 -0.00693431497 0
+ -0.0885721445 0.995574236 -0.0314151682 0
+ 0.00412662979 0.0319056176 0.999482393 0
+ 2.15423417 0 0 1
+  
+ 0.996161163 0.0866278186 -0.0125903431 0
+ -0.0871430263 0.995003223 -0.0487311892 0
+ 0.00830595568 0.0496412814 0.998732567 0
+ 1.93592119 0 0 1
+ shader "mynDiffuse"
+ nsides 3
+ vidxs 3 1 UINT
+0 2 1
+ nidxs 3 1 UINT
+0 0 0
+ vlist 3 1 VECTOR
+2 -2.44929371e-16 3.46410155 0 4 0 2 -2.44929371e-16 -3.46410155
+ nlist 0.894427299 0.44721365 2.86658369e-16
+ smoothing on
+}
+
+mynDiffuse
+{
+ name mynDiffuse
+ diffuseColor 1.0 0.2 0.2
+}
+
