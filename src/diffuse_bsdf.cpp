@@ -1,4 +1,5 @@
 #include "diffuse_bsdf.hpp"
+bsdf_init; bsdf_sample; bsdf_eval;
 
 /* see: https://docs.arnoldrenderer.com/display/AFMUG/Creating+a+shader#CreatingaShader-1.2Creatingashader
  * although code in the above link is deprecated in Arnold 5.0 so I put the diffuse example instead
