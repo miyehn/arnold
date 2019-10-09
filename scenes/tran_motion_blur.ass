@@ -1,0 +1,90 @@
+
+options
+{
+ AA_samples 10
+ outputs "RGBA RGBA filter testrender"
+ xres 640
+ yres 480
+ GI_diffuse_depth 1
+ GI_specular_depth 1
+ GI_specular_samples 4
+}
+
+gaussian_filter
+{
+ name filter
+ width 2
+}
+
+driver_jpeg
+{
+ name testrender
+ filename "tran_motion_blur.jpg"
+}
+
+persp_camera
+{
+ name mycamera
+ position 0 1 9
+ look_at 0 1 0
+ up 0 1 0
+ handedness "left"
+ shutter_start 0
+ shutter_end 1
+ fov 40
+}
+
+physical_sky
+{
+  name sky
+  elevation 30
+  azimuth 100
+}
+
+skydome_light
+{
+ name skydome
+ color sky
+ intensity 3
+}
+
+standard_surface
+{
+ name myshader
+ base_color 1 0.5 0.0
+ diffuse_roughness 0.7
+ specular_roughness 0.3
+ specular_IOR 1.8
+}
+
+sphere
+{
+ name mysphere1
+ shader "myshader"
+ center -2 0.5 0
+ radius 1
+}
+
+sphere
+{
+ name mysphere2
+ shader "myshader"
+ center 1 2 VECTOR
+-2 2.5 0 2 1 0
+ radius 1 2 FLOAT
+1 1
+}
+
+standard_surface
+{
+ name ground_shader
+ base 0.7
+ specular 0.0
+}
+
+plane
+{
+ shader "ground_shader"
+ point 0 -0.5 0
+ normal 0 1 0
+}

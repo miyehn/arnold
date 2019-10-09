@@ -1,0 +1,98 @@
+
+options
+{
+ AA_samples 8
+ outputs "RGBA RGBA filter testrender"
+ xres 640
+ yres 480
+ GI_diffuse_depth 4
+ GI_specular_depth 4
+ GI_specular_samples 4
+}
+
+gaussian_filter
+{
+ name filter
+ width 2
+}
+
+driver_jpeg
+{
+ name testrender
+ filename "dof.jpg"
+}
+
+persp_camera
+{
+ name mycam
+ position 10 15 -20
+ look_at 2 1 0
+ up 0 1 0
+ fov 18
+ focus_distance 29.5
+ aperture_size 3
+ aperture_blades 3
+ aperture_rotation 95
+ aperture_blade_curvature 0.400000006
+}
+
+skydome_light
+{
+ name sky
+ color 0.3 0.5 0.8
+ intensity 0.5
+}
+
+standard_surface
+{
+ name myshader
+ base 0.5
+ metalness 0.2
+ specular_roughness 0.3
+}
+
+point_light
+{
+ name pointLightShape1
+ color 1 0.75 0.5
+ intensity 1
+ exposure 7
+ position 0 4 -5
+ radius 0
+}
+
+sphere
+{
+ shader "myshader"
+ center 3 1 -5
+ radius 1
+}
+
+sphere
+{
+ shader "myshader"
+ center 3 1 0
+ radius 1
+}
+
+sphere
+{
+ shader "myshader"
+ center 3 1 5
+ radius 1
+}
+
+sphere
+{
+ shader "myshader"
+ center 3 1 2.5
+ radius 1
+}
+
+sphere
+{
+ shader "myshader"
+ center 3 1 -2.5
+ radius 1
+}
+
